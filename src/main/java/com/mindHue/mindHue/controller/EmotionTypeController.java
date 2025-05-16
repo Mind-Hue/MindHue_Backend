@@ -1,51 +1,30 @@
 package com.mindhue.mindhue.controller;
 
-import java.util.Optional;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.mindhue.mindhue.model.EmotionType;
-import com.mindhue.mindhue.service.EmotionTypeService;
+import com.mindhue.mindhue.repository.EmotionTypeRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 @RestController
-@RequestMapping("/api/v1/mindhue")
+@RequestMapping("/api/v1/emotion-types")
 public class EmotionTypeController {
 
-    private final EmotionTypeService emotionService;
+    private final EmotionTypeRepository repository;
 
-    public EmotionTypeController(EmotionTypeService emotionService) {
-        this.emotionService = emotionService;
+    public EmotionTypeController(EmotionTypeRepository repository) {
+        this.repository = repository;
     }
-    @PostMapping("/emotions")
-    public ResponseEntity<Object> createEmotionType(@Valid @RequestBody EmotionType emotion) {
-        emotionService.createEmotionType(emotion);
-        return emotionService.createEmotionType(emotion);
-    }
-    @GetMapping("/emotions/all")
+
+    @GetMapping
     public ResponseEntity<Object> getAllEmotionTypes() {
-        return emotionService.getAllEmotionTypes();
+        return ResponseEntity.ok(repository.findAll());
     }
-    @GetMapping("/emotions/{id}")
-    public Optional<EmotionType> getEmotionTypeById(@PathVariable int id) {
-        return emotionService.getEmotionTypeById(id);
-    }
-    @PutMapping("/emotions/update/{id}")
-    public ResponseEntity<Object> updateEmotionType(@PathVariable int id,@Valid @RequestBody EmotionType emotion) {
-        return emotionService.updateEmotionType(id, emotion);
-    }
-    @DeleteMapping("/emotions/delete/{id}")
-    public ResponseEntity<Object> deleteEmotionType(@PathVariable int id) {
-        return emotionService.deleteEmotionType(id);
+
+    @PostMapping
+    public ResponseEntity<Object> createEmotionType(@Valid @RequestBody EmotionType emotionType) {
+        EmotionType savedEmotionType = repository.save(emotionType);
+        return ResponseEntity.ok(savedEmotionType);
     }
 }

@@ -1,31 +1,24 @@
 package com.mindhue.mindhue.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "emotion_types") // Nombre más explícito en la tabla
+@Table(name = "emotion_types")
 public class EmotionType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty(message = "Name cannot be empty")
-    @Size(max = 50, message = "Name must not exceed 50 characters")
     private String name;
+    private String color;
 
-    @NotEmpty(message = "Color cannot be empty")
-    private String color; // Ejemplo: "Red", "Blue", etc.
+    @OneToMany(mappedBy = "emotionTypeId", cascade = CascadeType.ALL)
+    private List<EmotionLog> emotionLogs;
 
     public EmotionType() {}
 
-    // Getters y setters
     public int getId() {
         return this.id;
     }
@@ -49,4 +42,13 @@ public class EmotionType {
     public void setColor(String color) {
         this.color = color;
     }
+
+    public List<EmotionLog> getEmotionLogs() {
+        return this.emotionLogs;
+    }
+
+    public void setEmotionLogs(List<EmotionLog> emotionLogs) {
+        this.emotionLogs = emotionLogs;
+    }
+
 }
