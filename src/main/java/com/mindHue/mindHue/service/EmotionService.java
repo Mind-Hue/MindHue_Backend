@@ -1,9 +1,10 @@
-package com.mindHue.mindHue.service;
+package com.mindhue.mindhue.service;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import com.mindHue.repository.EmotionRepository;
-import com.mindHue.mindHue.model.Emotion;
+
+import com.mindhue.mindhue.model.Emotion;
+import com.mindhue.mindhue.repository.EmotionRepository;
 
 import org.springframework.http.HttpStatus;
 
@@ -23,4 +24,7 @@ public class EmotionService {
         return new ResponseEntity<>(emotion,HttpStatus.CREATED);
     }
 
+    public ResponseEntity<Object> getAllEmotions() {
+        return new ResponseEntity<>(emotionRepository.findAll(), HttpStatus.OK);
+    }
 }

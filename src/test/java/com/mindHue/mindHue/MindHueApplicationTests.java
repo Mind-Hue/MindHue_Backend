@@ -1,4 +1,4 @@
-package com.mindHue.mindHue;
+package com.mindhue.mindhue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

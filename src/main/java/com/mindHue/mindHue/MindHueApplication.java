@@ -1,4 +1,4 @@
-package com.mindHue.mindHue;
+package com.mindhue.mindhue;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

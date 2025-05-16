@@ -1,4 +1,4 @@
-package com.mindHue.mindHue.model;
+package com.mindhue.mindhue.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,21 +13,18 @@ public class Emotion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String name;
-    private int colorHex;
-    private String exercise1;
-    private String exercise2;
-
+    private String colorHex;
 
     public Emotion() {}
 
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,30 +36,13 @@ public class Emotion {
         this.name = name;
     }
 
-    public int getColorHex() {
+    public String getColorHex() {
         return this.colorHex;
     }
 
-    public void setColorHex(int colorHex) {
+    public void setColorHex(String colorHex) {
         this.colorHex = colorHex;
     }
-
-    public String getExercise1() {
-        return this.exercise1;
-    }
-
-    public void setExercise1(String exercise1) {
-        this.exercise1 = exercise1;
-    }
-
-    public String getExercise2() {
-        return this.exercise2;
-    }
-
-    public void setExercise2(String exercise2) {
-        this.exercise2 = exercise2;
-    }
-
 
 }
 
