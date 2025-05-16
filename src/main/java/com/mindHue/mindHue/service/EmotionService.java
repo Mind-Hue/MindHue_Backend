@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 
 
 
-@service  
+@Service  
 public class EmotionService {
     
     private final EmotionRepository emotionRepository;
