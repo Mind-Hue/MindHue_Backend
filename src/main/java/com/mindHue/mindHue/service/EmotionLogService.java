@@ -33,7 +33,6 @@ public class EmotionLogService {
         return repository.findById(id).map(log -> {
             log.setEmotionTypeId(updatedLog.getEmotionTypeId());
             log.setExerciseId(updatedLog.getExerciseId());
-            log.setIntensity(updatedLog.getIntensity());
             log.setUserName(updatedLog.getUserName());
             repository.save(log);
             return ResponseEntity.ok(log);

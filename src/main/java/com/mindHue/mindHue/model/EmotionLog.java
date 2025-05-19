@@ -1,8 +1,6 @@
 package com.mindhue.mindhue.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
@@ -21,10 +19,6 @@ public class EmotionLog {
     @NotNull(message = "ExerciseId cannot be null")
     private int exerciseId;
 
-    @NotNull(message = "Intensity cannot be null")
-    @Min(value = 1, message = "Intensity must be at least 1")
-    @Max(value = 5, message = "Intensity must not exceed 5")
-    private int intensity;
 
     @NotNull(message = "UserName cannot be null")
     private String userName;
@@ -60,14 +54,6 @@ public class EmotionLog {
         this.exerciseId = exerciseId;
     }
 
-    public int getIntensity() {
-        return this.intensity;
-    }
-
-    public void setIntensity(int intensity) {
-        this.intensity = intensity;
-    }
-
     public String getUserName() {
         return this.userName;
     }
@@ -75,7 +61,7 @@ public class EmotionLog {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
+    
     public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
@@ -84,5 +70,5 @@ public class EmotionLog {
         this.createdAt = createdAt;
     }
 
-    // Getters y setters
+    
 }

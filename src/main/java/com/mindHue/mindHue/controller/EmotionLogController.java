@@ -2,12 +2,17 @@ package com.mindhue.mindhue.controller;
 
 import com.mindhue.mindhue.model.EmotionLog;
 import com.mindhue.mindhue.service.EmotionLogService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+// Removed duplicate class definition
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/v1/emotion-logs")
 public class EmotionLogController {
 
@@ -18,7 +23,15 @@ public class EmotionLogController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createEmotionLog(@Valid @RequestBody EmotionLog log) {
+    public ResponseEntity<Object> createEmotionLog(@RequestBody EmotionLog log) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            String jsonString = mapper.writeValueAsString(log);
+            System.out.println("Received emotion log: " + jsonString);
+        } catch (Exception e) {
+            System.out.println("Error converting EmotionLog to JSON: " + e.getMessage());
+        }
         return service.createEmotionLog(log);
     }
 
@@ -34,7 +47,7 @@ public class EmotionLogController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EmotionLog> updateEmotionLog(@PathVariable int id, @Valid @RequestBody EmotionLog log) {
+    public ResponseEntity<EmotionLog> updateEmotionLog(@PathVariable int id, @RequestBody EmotionLog log) {
         return service.updateEmotionLog(id, log);
     }
 
