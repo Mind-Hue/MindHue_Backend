@@ -23,6 +23,13 @@ public class EmotionTypeController {
         return ResponseEntity.ok(repository.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getEmotionTypeById(@PathVariable int id) {
+        return ResponseEntity.ok(repository.findById(id)
+            .map(emotionType -> ResponseEntity.ok(emotionType))
+            .orElse(ResponseEntity.notFound().build()));
+    }
+
     @PostMapping
     public ResponseEntity<Object> createEmotionType(@Valid @RequestBody EmotionType emotionType) {
         EmotionType savedEmotionType = repository.save(emotionType);
