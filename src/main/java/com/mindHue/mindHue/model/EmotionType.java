@@ -12,7 +12,7 @@ public class EmotionType {
     private int id;
 
     private String name;
-    private String color;
+    private String colorHex;
 
     @OneToMany(mappedBy = "emotionTypeId", cascade = CascadeType.ALL)
     private List<EmotionLog> emotionLogs;
@@ -35,12 +35,12 @@ public class EmotionType {
         this.name = name;
     }
 
-    public String getColor() {
-        return this.color;
+    public String getColorHex() {
+        return this.colorHex;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColorHex(String colorHex) {
+        this.colorHex = colorHex;
     }
 
     public List<EmotionLog> getEmotionLogs() {
