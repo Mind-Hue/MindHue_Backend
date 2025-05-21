@@ -15,8 +15,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/questions")
 @CrossOrigin(origins = "*", allowedHeaders = "*") 
+@RequestMapping("/api/v1/questions")
+
 public class QuestionsController {
 
     private final QuestionsService questionsService;
