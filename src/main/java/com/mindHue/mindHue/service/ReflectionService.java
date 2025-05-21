@@ -2,9 +2,9 @@ package com.mindhue.mindhue.service;
 
 import com.mindhue.mindhue.model.Reflection;
 import com.mindhue.mindhue.repository.ReflectionRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,34 +16,31 @@ public class ReflectionService {
         this.repository = repository;
     }
 
-    public ResponseEntity<Object> createReflection(Reflection reflection) {
-        repository.save(reflection);
-        return ResponseEntity.ok(reflection);
+    public Reflection createReflection(Reflection reflection) {
+        return repository.save(reflection);
     }
 
-    public ResponseEntity<Object> getReflectionsByLogId(int logId) {
-        return ResponseEntity.ok(repository.findAll().stream()
-                .filter(reflection -> reflection.getEmotionLogId() == logId));
+    public List<Reflection> getAllReflections() {
+        return repository.findAll();
     }
 
     public Optional<Reflection> getReflectionById(int id) {
         return repository.findById(id);
     }
 
-    public ResponseEntity<Reflection> updateReflection(int id, Reflection updatedReflection) {
+    public Reflection updateReflection(int id, Reflection updatedReflection) {
         return repository.findById(id).map(reflection -> {
-            reflection.setAnswers(updatedReflection.getAnswers());
-            reflection.setExtraNote(updatedReflection.getExtraNote());
-            repository.save(reflection);
-            return ResponseEntity.ok(reflection);
-        }).orElse(ResponseEntity.notFound().build());
+            reflection.setQuestion(updatedReflection.getQuestion());
+            reflection.setAnswer(updatedReflection.getAnswer());
+            return repository.save(reflection);
+        }).orElse(null);
     }
 
-    public ResponseEntity<Object> deleteReflection(int id) {
+    public boolean deleteReflection(int id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
-            return ResponseEntity.ok("Reflection deleted");
+            return true;
         }
-        return ResponseEntity.notFound().build();
+        return false;
     }
 }

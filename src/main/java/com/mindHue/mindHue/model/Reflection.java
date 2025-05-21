@@ -1,61 +1,45 @@
 package com.mindhue.mindhue.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-
-import java.util.List;
 
 @Entity
-@Table(name = "reflections")
+@Table(name = "reflections_answers")
 public class Reflection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull(message = "EmotionLogId cannot be null")
-    private int emotionLogId;
+    @ManyToOne
+    @JoinColumn(name = "question_id", nullable = false)
+    private Questions question;
 
-    @ElementCollection
-    @NotEmpty(message = "Answers cannot be empty")
-    private List<String> answers;
-
-    private String extraNote;
+    @Column(nullable = false, length = 1000)
+    private String answer;
 
     public Reflection() {}
 
-
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public int getEmotionLogId() {
-        return this.emotionLogId;
+    public Questions getQuestion() {
+        return question;
     }
 
-    public void setEmotionLogId(int emotionLogId) {
-        this.emotionLogId = emotionLogId;
+    public void setQuestion(Questions question) {
+        this.question = question;
     }
 
-    public List<String> getAnswers() {
-        return this.answers;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setAnswers(List<String> answers) {
-        this.answers = answers;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
-
-    public String getExtraNote() {
-        return this.extraNote;
-    }
-
-    public void setExtraNote(String extraNote) {
-        this.extraNote = extraNote;
-    }
-
 }
