@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*") 
 @RequestMapping("/api/v1/reflections")
 public class ReflectionController {
 
