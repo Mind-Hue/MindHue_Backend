@@ -1,4 +1,5 @@
 package com.mindhue.mindhue.model;
+import java.util.List;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +15,8 @@ public class Questions {
     @NotNull
     private String question;
 
+    @OneToMany(mappedBy = "question")
+      private List<Reflection> reflections;
     public Questions() {}
 
     public int getId() {
